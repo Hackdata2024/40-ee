@@ -15,6 +15,7 @@ const medicationSchema = new mongoose.Schema({
     }],
     default: undefined,  
   },
+  notes: { type: String },
 });
 
 const Medication = mongoose.model('Medication', medicationSchema);
