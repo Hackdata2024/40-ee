@@ -11,8 +11,9 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(cors());
-app.use(bodyParser.json());
+app.use(express.json());
 app.use(loggerMiddleware);
+
 
 app.get('/', (req, res) => {
   res.send('Welcome to the Express.js API');
