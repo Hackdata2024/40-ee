@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
+import "./styles.css";
+
 const NewsComponent = () => {
   const [newsData, setNewsData] = useState([]);
 
@@ -19,49 +21,36 @@ const NewsComponent = () => {
   }, []);
 
   return (
-    <div className="bg-white rounded-lg shadow-lg p-4 overflow-auto h-full">
-      <h1 className="text-2xl font-bold mb-4 text-blue-700">
-        Latest Health News
-      </h1>
+    <div className="news-component rounded-lg shadow-lg p-4 overflow-auto h-full">
+      <h1 className="text-2xl font-bold mb-4">Latest Health News</h1>
       <div className="overflow-x-auto">
         <table className="min-w-full">
-          <thead className="bg-blue-50">
+          <thead>
             <tr>
-              <th className="p-4 text-left font-semibold text-gray-700">
-                Title
-              </th>
-              <th className="p-4 text-left font-semibold text-gray-700">
-                Description
-              </th>
-              <th className="p-4 text-left font-semibold text-gray-700">
-                Published Date
-              </th>
-              <th className="p-4 text-left font-semibold text-gray-700">
-                Source
-              </th>
+              <th className="p-4 text-left font-semibold">Title</th>
+              <th className="p-4 text-left font-semibold">Description</th>
+              <th className="p-4 text-left font-semibold">Published Date</th>
+              <th className="p-4 text-left font-semibold">Source</th>
             </tr>
           </thead>
           <tbody>
             {newsData.map((article, index) => (
-              <tr
-                key={index}
-                className="border-b border-gray-200 hover:bg-gray-50"
-              >
+              <tr key={index} className="border-b hover:bg-gray-50">
                 <td className="p-4">
                   <a
                     href={article.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-green-600 hover:underline"
+                    className="hover:underline"
                   >
                     {article.title}
                   </a>
                 </td>
-                <td className="p-4 text-gray-600">{article.description}</td>
-                <td className="p-4 text-gray-500">
+                <td className="p-4">{article.description}</td>
+                <td className="p-4">
                   {new Date(article.publishedAt).toLocaleDateString()}
                 </td>
-                <td className="p-4 text-gray-500">{article.source.name}</td>
+                <td className="p-4">{article.source.name}</td>
               </tr>
             ))}
           </tbody>

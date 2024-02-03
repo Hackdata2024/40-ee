@@ -4,13 +4,17 @@ import TaskReminder from "./TaskReminder";
 import MedicationAlert from "./MedicationAlert";
 import EmergencyCall from "./EmergencyCall";
 import NewsComponent from "./PositiveNewsHeadline";
-import "./styles.css"; // Import the CSS file
+import { useTheme } from "./ThemeContext"; // Import useTheme
 
 const Dashboard = () => {
+  const { theme } = useTheme(); // Use the useTheme hook
+
   return (
-    <div className="container mx-auto p-4 bg-gray-100">
-      <Header />
-      {/* You can place the ThemeToggle wherever you prefer */}
+    <div className={`w-full ${theme === "light" ? "bg-light" : "bg-dark"}`}>
+      {/* Set the background color */}
+      <div className="mb-4">
+        <Header /> {/* Set the header */}
+      </div>
       <div className="flex flex-wrap md:flex-nowrap gap-4">
         <div className="w-full md:w-1/2 space-y-4">
           <div className="bg-white rounded-lg shadow-lg overflow-hidden">
