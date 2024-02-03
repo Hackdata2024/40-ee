@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const loggerMiddleware = require('./middleware/logger');
 const routes = require('./routes');
+const mongoose = require('mongoose');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -18,7 +19,7 @@ app.get('/', (req, res) => {
 }
 );
 
-mongoose.connect('mongodb://localhost:27017/elderly_support_app', {
+mongoose.connect('mongodb+srv://am398:IamwxhwOL6pVcA3i@cluster0.e8ghf1k.mongodb.net/?retryWrites=true&w=majority', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
