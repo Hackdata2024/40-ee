@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { FaEdit, FaTrashAlt, FaClock } from "react-icons/fa";
+import axios from 'axios';
 
 const TaskReminders = () => {
   const [tasks, setTasks] = useState([]);
@@ -9,6 +10,17 @@ const TaskReminders = () => {
   const [newTaskReminderTime, setNewTaskReminderTime] = useState("");
   const [editingId, setEditingId] = useState(null);
   const [editTitle, setEditTitle] = useState("");
+
+
+  const fetchTasks = async () => {  
+    const {data} = await axios.get('http://localhost:5000/api/tasks');
+    setTasks(data);
+  }
+
+
+  useEffect(() => {
+    fetchTasks();
+  }, []);
 
   const addTask = () => {
     if (!newTaskTitle.trim()) return;
