@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 // Dummy medication data
 let dummyData = [
@@ -27,11 +28,13 @@ let dummyData = [
 
 const useMedicationData = () => {
   const [medications, setMedications] = useState([]);
+  const fetchMedication = async () => {
+    const { data } = await axios.get('http://localhost:5000/api/medications');
+    setMedications(data);
+  }
 
   useEffect(() => {
-    // Simulate fetching medication data from an API or database
-    // For now, we'll use the dummy data directly
-    setMedications(dummyData);
+    fetchMedication();
   }, []);
 
   return medications;

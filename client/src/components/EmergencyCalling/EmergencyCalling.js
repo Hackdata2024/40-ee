@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import axios from "axios";
+import { useEffect } from "react";
 
 const EmergencyCalling = () => {
   const [emergencyContact, setEmergencyContact] = useState({
@@ -7,6 +9,20 @@ const EmergencyCalling = () => {
     relationship: "",
   });
   const [emergencyContacts, setEmergencyContacts] = useState([]);
+
+  const fetchContacts = async () => {
+    const { data } = await axios.get('http://localhost:5000/api/users');
+    console.log(data);
+    data.map((user) => {
+      console.log(user.emergencyContact);
+      setEmergencyContacts(user.emergencyContact);
+    });
+  }
+
+
+  useEffect(() => {
+    fetchContacts();
+  }, []);
 
   const handleInputChange = (e) => {
     setEmergencyContact({
