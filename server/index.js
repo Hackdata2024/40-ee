@@ -19,11 +19,11 @@ app.get('/', (req, res) => {
 }
 );
 
-mongoose.connect('mongodb+srv://am398:IamwxhwOL6pVcA3i@cluster0.e8ghf1k.mongodb.net/?retryWrites=true&w=majority', {
+mongoose.connect('mongodb+srv://am398:IamwxhwOL6pVcA3i@cluster0.e8ghf1k.mongodb.net/mydb', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  useCreateIndex: true,
-  useFindAndModify: false
+  // useCreateIndex: true,
+  // useFindAndModify: false
 })
   .then(() => console.log('Connected to MongoDB'))
   .catch(err => console.error('Error connecting to MongoDB:', err));
