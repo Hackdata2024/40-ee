@@ -25,7 +25,7 @@ function App() {
         <Route path="/login" element={<Auth />} />
         <Route path="/task-reminders" element={<TaskReminders />} />
 
-        <Route path="/medication-alerts" component={MedicationAlerts} />
+        <Route path="/medication-alerts" element={<MedicationAlerts />} />
         {/*
         <Route path="/emergency-calling" component={EmergencyCalling} />
         <Route path="/positive-news-feed" component={PositiveNewsFeed} />
