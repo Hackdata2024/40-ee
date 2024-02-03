@@ -6,6 +6,7 @@ import Auth from "./components/Auth/Auth";
 // import Register from './components/Register';
 import TaskReminders from "./components/TaskReminders/TaskReminders";
 import MedicationAlerts from "./components/MedicationAlerts/MedicationAlerts";
+import EmergencyCalling from "./components/EmergencyCalling/EmergencyCalling";
 import { ThemeProvider } from "./components/Dashboard/ThemeContext";
 
 function App() {
@@ -26,10 +27,8 @@ function App() {
         <Route path="/task-reminders" element={<TaskReminders />} />
 
         <Route path="/medication-alerts" element={<MedicationAlerts />} />
-        {/*
-        <Route path="/emergency-calling" component={EmergencyCalling} />
-        <Route path="/positive-news-feed" component={PositiveNewsFeed} />
-        <Route path="/user-profile" component={UserProfile} /> */}
+
+        <Route path="/emergency-calling" element={<EmergencyCalling />} />
       </Routes>
     </Router>
   );
