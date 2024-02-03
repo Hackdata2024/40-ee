@@ -1,6 +1,6 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { FaEdit, FaTrashAlt, FaClock } from "react-icons/fa";
-import axios from 'axios';
+import axios from "axios";
 
 const TaskReminders = () => {
   const [tasks, setTasks] = useState([]);
@@ -10,13 +10,14 @@ const TaskReminders = () => {
   const [newTaskReminderTime, setNewTaskReminderTime] = useState("");
   const [editingId, setEditingId] = useState(null);
   const [editTitle, setEditTitle] = useState("");
+  useEffect(() => {
+    fetchTasks();
+  }, []);
 
-
-  const fetchTasks = async () => {  
-    const {data} = await axios.get('http://localhost:5000/api/tasks');
+  const fetchTasks = async () => {
+    const { data } = await axios.get("http://localhost:5000/api/tasks");
     setTasks(data);
-  }
-
+  };
 
   useEffect(() => {
     fetchTasks();
@@ -41,11 +42,12 @@ const TaskReminders = () => {
   };
 
   const toggleTaskCompletion = (id) => {
-    setTasks(
-      tasks.map((task) =>
-        task.id === id ? { ...task, completed: !task.completed } : task
-      )
+    console.log("Toggling completion for task:", id);
+    const updatedTasks = tasks.map((task) =>
+      task.id === id ? { ...task, completed: !task.completed } : task
     );
+    console.log("Updated tasks:", updatedTasks);
+    setTasks(updatedTasks);
   };
 
   const removeTask = (id) => {
@@ -128,15 +130,17 @@ const TaskReminders = () => {
           Add Task
         </button>
       </div>
-      <ul>
+      <ul className="space-y-4">
         {tasks.map((task) => (
           <li
             key={task.id}
-            className={`bg-gray-100 rounded-md overflow-hidden shadow ${
-              task.completed ? "opacity-75" : ""
+            className={`bg-white rounded-md overflow-hidden shadow-lg ${
+              task.completed
+                ? "border-green-500 border-2"
+                : "border-gray-200 border-2"
             }`}
           >
-            <div className="p-4 flex justify-between items-center">
+            <div className="p-4 flex justify-between items-start">
               <div className="flex-1">
                 {editingId === task.id ? (
                   <input
@@ -146,26 +150,32 @@ const TaskReminders = () => {
                     className="input text-base w-full"
                   />
                 ) : (
-                  <div className="flex items-center space-x-4">
-                    <input
-                      type="checkbox"
-                      checked={task.completed}
-                      onChange={() => toggleTaskCompletion(task.id)}
-                      className="form-checkbox rounded text-blue-500 h-5 w-5"
-                    />
-                    <span
-                      className={`text-lg ${
-                        task.completed
-                          ? "text-gray-500 line-through"
-                          : "text-gray-800"
-                      }`}
-                    >
-                      {task.title}
-                    </span>
+                  <div>
+                    <div className="flex items-center space-x-4">
+                      <input
+                        type="checkbox"
+                        checked={task.completed}
+                        onChange={() => toggleTaskCompletion(task.id)}
+                        className="form-checkbox rounded text-blue-500 h-5 w-5"
+                      />
+                      <span
+                        className={`text-lg ${
+                          task.completed
+                            ? "text-gray-500 line-through"
+                            : "text-gray-800"
+                        }`}
+                      >
+                        {task.title}
+                      </span>
+                    </div>
+                    {/* Display task description */}
+                    <p className="text-sm text-gray-600 mt-2">
+                      {task.description}
+                    </p>
                   </div>
                 )}
               </div>
-              <div className="flex items-center space-x-2">
+              <div className="flex flex-col space-y-2 sm:space-y-0 sm:flex-row sm:items-center sm:space-x-2">
                 {editingId === task.id ? (
                   <button
                     onClick={() => saveEdit(task.id)}
@@ -174,22 +184,20 @@ const TaskReminders = () => {
                     Save
                   </button>
                 ) : (
-                  <>
+                  <div className="flex space-x-2">
                     <button
                       onClick={() => startEditing(task.id)}
-                      className="btn p-2 rounded-full bg-yellow-500 hover:bg-yellow-700 text-white flex items-center justify-center text-lg"
+                      className="btn p-2 rounded-full bg-yellow-500 hover:bg-yellow-700 text-white flex items-center justify-center"
                     >
-                      <FaEdit className="h-5 w-5" />{" "}
-                      {/* Adjust size as needed */}
+                      <FaEdit className="h-6 w-6" />
                     </button>
                     <button
                       onClick={() => removeTask(task.id)}
-                      className="btn p-2 rounded-full bg-red-500 hover:bg-red-700 text-white flex items-center justify-center text-lg"
+                      className="btn p-2 rounded-full bg-red-500 hover:bg-red-700 text-white flex items-center justify-center"
                     >
-                      <FaTrashAlt className="h-5 w-5" />{" "}
-                      {/* Adjust size as needed */}
+                      <FaTrashAlt className="h-6 w-6" />
                     </button>
-                  </>
+                  </div>
                 )}
               </div>
             </div>
