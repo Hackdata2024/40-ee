@@ -1,6 +1,5 @@
 .header {
-  background-color: var(--bg-color);
-  color: var(--text-color);
+  background-color: #f5f5f5; /* Replace with the color you want */
 }
 .positive-news-headline {
   background-color: var(--bg-color);
@@ -21,4 +20,33 @@
 .container {
   background-color: var(--bg-color);
   color: var(--text-color);
+}
+.news-component {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.news-component a {
+  color: var(--text-color);
+}
+
+.news-component a:hover {
+  color: var(--text-color);
+  text-decoration: underline;
+}
+
+.news-component thead {
+  background-color: var(--bg-color);
+}
+
+.news-component tbody tr:hover {
+  background-color: var(--bg-color);
+}
+.bg-light {
+  background-color: #f5f5f5; /* Light background color */
+}
+
+.bg-dark {
+  background-color: #000;
+  color: #f5f5f5; /* Dark background color */
 }

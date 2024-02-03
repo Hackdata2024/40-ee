@@ -6,12 +6,10 @@ const MedicationAlert = () => {
   return (
     <div className="medication-alert flex flex-col justify-between">
       <div>
-        <h2 className="text-lg font-semibold text-gray-700 mb-4">
-          Medication Alerts
-        </h2>
+        <h2 className="text-lg font-semibold mb-4">Medication Alerts</h2>
         <ul className="overflow-auto h-48">
           {medications.map((medication, index) => (
-            <li key={index} className="mb-2 text-gray-600">
+            <li key={index} className="mb-2">
               {medication}
             </li>
           ))}
