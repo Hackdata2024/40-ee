@@ -44,6 +44,7 @@ const MedicationAlert = () => {
     dosage: "",
     endDate: "",
     intakeTimes: [],
+    daysOfWeek: [],
   });
   const [newTime, setNewTime] = useState("");
 
@@ -61,7 +62,13 @@ const MedicationAlert = () => {
       intakeTimes: [...newMedication.intakeTimes, newTime],
     });
     setShowAddModal(false);
-    setNewMedication({ name: "", dosage: "", endDate: "", intakeTimes: [] });
+    setNewMedication({
+      name: "",
+      dosage: "",
+      endDate: "",
+      intakeTimes: [],
+      daysOfWeek: [],
+    });
   };
 
   const handleAddTime = () => {
@@ -73,6 +80,21 @@ const MedicationAlert = () => {
       setNewTime("");
     } else {
       alert("Please enter a valid time in the format HH:MM.");
+    }
+  };
+
+  const handleDayOfWeekChange = (e, day) => {
+    const { checked } = e.target;
+    if (checked) {
+      setNewMedication({
+        ...newMedication,
+        daysOfWeek: [...newMedication.daysOfWeek, day],
+      });
+    } else {
+      setNewMedication({
+        ...newMedication,
+        daysOfWeek: newMedication.daysOfWeek.filter((d) => d !== day),
+      });
     }
   };
 
@@ -197,6 +219,37 @@ const MedicationAlert = () => {
                 ))}
               </div>
             </div>
+            <div className="mb-4">
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                Days of the Week
+              </label>
+              <div className="flex flex-wrap">
+                {[
+                  "Sunday",
+                  "Monday",
+                  "Tuesday",
+                  "Wednesday",
+                  "Thursday",
+                  "Friday",
+                  "Saturday",
+                ].map((day) => (
+                  <label
+                    key={day}
+                    className="inline-flex items-center mr-4 mb-2"
+                  >
+                    <input
+                      type="checkbox"
+                      name="daysOfWeek"
+                      value={day}
+                      checked={newMedication.daysOfWeek.includes(day)}
+                      onChange={(e) => handleDayOfWeekChange(e, day)}
+                      className="form-checkbox h-5 w-5 text-blue-500"
+                    />
+                    <span className="ml-2 text-gray-700">{day}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
             <button
               onClick={handleAddMedication}
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-colors mt-4"
@@ -222,11 +275,14 @@ const MedicationAlert = () => {
               <p className="text-gray-600">
                 Intake Times: {medication.intakeTimes.join(", ")}
               </p>
+              <p className="text-gray-600">
+                Days of the Week: {medication.daysOfWeek.join(", ")}
+              </p>
             </div>
           </div>
         ))}
       </div>
-    </div>
+    </div>  
   );
 };
 
