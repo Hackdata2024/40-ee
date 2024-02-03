@@ -7,7 +7,7 @@ import Auth from './components/Auth/Auth';
 // import Login from './components/Login';
 // import Register from './components/Register';
 import TaskReminders from './components/TaskReminders/TaskReminders';
-import MedicationAlerts from './components/MedicationAlert/MedicationAlerts';
+import MedicationAlerts from './components/MedicationAlerts/MedicationAlerts';
 
 function App() {
   return (
@@ -16,7 +16,7 @@ function App() {
         {/* <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} /> */}
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/login" element={<Auth />} />
+        <Route path="/login" element={<Auth/>} />
         <Route path="/task-reminders" element={<TaskReminders />} />
 
         <Route path="/medication-alerts" component={MedicationAlerts} />
