@@ -8,8 +8,7 @@ const taskSchema = new mongoose.Schema({
   description: { type: String },
   due_date: { type: Date },
   reminder_time: { type: Date },
-  completed: { type: Boolean, default: false },
-  notes: { type: String },
+  completed: { type: Boolean, default: false }
 });
 
 const Task = mongoose.model('Task', taskSchema);

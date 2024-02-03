@@ -1,5 +1,5 @@
 // server/controllers/emergencyController.js
-const Emergency = require('../models/Emergency');
+const Emergency = require('../models/EmergencyContact');
 
 const getAllEmergencies = async (req, res) => {
   try {

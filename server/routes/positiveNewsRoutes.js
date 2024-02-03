@@ -1,7 +1,8 @@
 // server/routes/positiveNewsRoutes.js
 const express = require('express');
 const router = express.Router();
-const positiveNewsController = require('../controllers/positiveNewsController');
+
+// const positiveNewsController = require('../controllers/positiveNewsController');
 
 router.get('/', positiveNewsController.getAllPositiveNews);
 router.get('/:newsId', positiveNewsController.getPositiveNewsById);
