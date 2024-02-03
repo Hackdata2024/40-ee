@@ -1,15 +1,19 @@
 // server/models/User.js
 const mongoose = require('mongoose');
-const EmergencyContact = require('./EmergencyContact');
+
+const emergencyContactSchema = new mongoose.Schema({
+    name: { type: String , required: true},
+    phone: { type: String , required: true},
+    relationship: { type: String },
+  });
 
 const userSchema = new mongoose.Schema({
-    user_id: { type: Number, required: true, unique: true },
-    first_name: { type: String, required: true },
-    last_name: { type: String, required: true },
-    date_of_birth: { type: Date, default: null },
-    email: { type: String, required: true, unique: true },
-    phone_number: { type: String },
-    emergency_contact: [EmergencyContact],
+    firstName: { type: String, required: true },
+    lastName: { type: String, required: true },
+    dateOfBirth: { type: Date, required: true},
+    email: { type: String, required: true, unique: true, match: /.+\@.+\..+/ },
+    phoneNumber: { type: String, required: true},
+    emergencyContact: [emergencyContactSchema],
     password: { type: String, required: true },
 });
 
