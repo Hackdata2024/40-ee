@@ -8,6 +8,7 @@ import TaskReminders from "./components/TaskReminders/TaskReminders";
 import MedicationAlerts from "./components/MedicationAlerts/MedicationAlerts";
 import EmergencyCalling from "./components/EmergencyCalling/EmergencyCalling";
 import { ThemeProvider } from "./components/Dashboard/ThemeContext";
+import Main from "./components/Main";
 
 function App() {
   return (
@@ -15,6 +16,8 @@ function App() {
       <Routes>
         {/* <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} /> */}
+        <Route path="/" element={<Main />} />
+
         <Route
           path="/dashboard"
           element={
