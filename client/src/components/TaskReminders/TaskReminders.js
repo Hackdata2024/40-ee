@@ -50,8 +50,16 @@ const TaskReminders = () => {
     setTasks(updatedTasks);
   };
 
-  const removeTask = (id) => {
-    setTasks(tasks.filter((task) => task.id !== id));
+  const removeTask = async (id) => {
+    try {
+      await axios.delete(`http://localhost:5000/api/tasks/${id}`);
+
+      setTasks(tasks.filter((task) => task.id !== id));
+    } catch (error) {
+      // Log or handle the error if the request fails
+      console.error("Error removing task:", error);
+      // Optionally, display a message to the user indicating that the task could not be deleted
+    }
   };
 
   const startEditing = (id) => {
@@ -64,12 +72,23 @@ const TaskReminders = () => {
     setEditTitle(e.target.value);
   };
 
-  const saveEdit = (id) => {
-    setTasks(
-      tasks.map((task) =>
-        task.id === id ? { ...task, title: editTitle } : task
-      )
-    );
+  const saveEdit = async (id) => {
+    try {
+      // Send a PUT request to the server
+      const updatedTask = await axios.put(
+        `http://localhost:5000/api/tasks/${id}`,
+        {
+          title: editTitle,
+        }
+      );
+
+      // If the request is successful, update the task in the state
+      setTasks(tasks.map((task) => (task.id === id ? updatedTask.data : task)));
+    } catch (error) {
+      // Handle the error
+      console.error("Error updating task:", error);
+    }
+
     setEditingId(null);
     setEditTitle("");
   };
