@@ -8,6 +8,7 @@ const medicationSchema = new mongoose.Schema({
   dosage: { type: String },
   frequency: { type: String },
   intake_times: { type: [Date] },
+  end_date: { type: Date },
   reminder_enabled: { type: Boolean, default: false },
   last_taken: { type: Date },
 });
