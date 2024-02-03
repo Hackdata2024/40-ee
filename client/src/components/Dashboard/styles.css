@@ -1,0 +1,24 @@
+.header {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+.positive-news-headline {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+.emergency-call {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+.medication-alert {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+.task-reminder {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+.container {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
