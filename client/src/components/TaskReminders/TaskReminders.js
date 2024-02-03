@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FaEdit, FaTrashAlt, FaClock } from "react-icons/fa";
-import axios from "axios";
+import axios from 'axios';
 
 const TaskReminders = () => {
   const [tasks, setTasks] = useState([]);
@@ -10,61 +10,83 @@ const TaskReminders = () => {
   const [newTaskReminderTime, setNewTaskReminderTime] = useState("");
   const [editingId, setEditingId] = useState(null);
   const [editTitle, setEditTitle] = useState("");
-  useEffect(() => {
-    fetchTasks();
-  }, []);
 
   const fetchTasks = async () => {
-    const { data } = await axios.get("http://localhost:5000/api/tasks");
-    setTasks(data);
+    try {
+      const { data } = await axios.get('http://localhost:5000/api/tasks');
+      setTasks(data);
+    } catch (error) {
+      console.error('Error fetching tasks:', error);
+    }
   };
 
   useEffect(() => {
     fetchTasks();
   }, []);
 
-  const addTask = () => {
+  const addTask = async () => {
+    console.log("Hello");
+    console.log(newTaskTitle, newTaskDescription, newTaskDueDate, newTaskReminderTime);
     if (!newTaskTitle.trim()) return;
-    const newTask = {
-      id: Date.now(), // Simulating task_id
-      user_id: 1, // Static user_id, in a real app, this would come from user session
-      title: newTaskTitle,
-      description: newTaskDescription,
-      due_date: newTaskDueDate,
-      reminder_time: newTaskReminderTime,
-      completed: false,
-    };
-    setTasks([...tasks, newTask]);
-    setNewTaskTitle("");
-    setNewTaskDescription("");
-    setNewTaskDueDate("");
-    setNewTaskReminderTime("");
+
+    const reminderDate = new Date();
+    const [hours, minutes] = newTaskReminderTime.split(':');
+    reminderDate.setHours(hours, minutes);
+
+  
+    try {
+      const response = await axios.post('http://localhost:5000/api/tasks', {
+        user_id: 1,
+        task_id: 4,
+        title: newTaskTitle,
+        description: newTaskDescription,
+        due_date: newTaskDueDate,
+        reminder_time: reminderDate,
+        completed: false,
+      });
+
+      const newTask = response.data; // Assuming the server returns the new task directly
+      setTasks([...tasks, newTask]);
+
+      setNewTaskTitle("");
+      setNewTaskDescription("");
+      setNewTaskDueDate("");
+      setNewTaskReminderTime("");
+    } catch (error) {
+      console.error('Error adding task:', error);
+    }
   };
 
-  const toggleTaskCompletion = (id) => {
-    console.log("Toggling completion for task:", id);
-    const updatedTasks = tasks.map((task) =>
-      task.id === id ? { ...task, completed: !task.completed } : task
-    );
-    console.log("Updated tasks:", updatedTasks);
-    setTasks(updatedTasks);
+
+  const toggleTaskCompletion = async (id) => {
+    try {
+      await axios.patch(`http://localhost:5000/api/tasks/${id}`, {
+        completed: !tasks.find((task) => task.task_id === id).completed,
+      });
+
+      setTasks(
+        tasks.map((task) =>
+          task.task_id === id ? { ...task, completed: !task.completed } : task
+        )
+      );
+    } catch (error) {
+      console.error('Error toggling task completion:', error);
+    }
   };
 
   const removeTask = async (id) => {
+    console.log(id);
     try {
       await axios.delete(`http://localhost:5000/api/tasks/${id}`);
-
-      setTasks(tasks.filter((task) => task.id !== id));
+      setTasks(tasks.filter((task) => task.task_id !== id));
     } catch (error) {
-      // Log or handle the error if the request fails
-      console.error("Error removing task:", error);
-      // Optionally, display a message to the user indicating that the task could not be deleted
+      console.error('Error removing task:', error);
     }
   };
 
   const startEditing = (id) => {
     setEditingId(id);
-    const task = tasks.find((task) => task.id === id);
+    const task = tasks.find((task) => task.task_id === id);
     setEditTitle(task.title);
   };
 
@@ -74,24 +96,22 @@ const TaskReminders = () => {
 
   const saveEdit = async (id) => {
     try {
-      // Send a PUT request to the server
-      const updatedTask = await axios.put(
-        `http://localhost:5000/api/tasks/${id}`,
-        {
-          title: editTitle,
-        }
+      await axios.patch(`http://localhost:5000/api/tasks/${id}`, {
+        title: editTitle,
+      });
+
+      setTasks(
+        tasks.map((task) =>
+          task.task_id === id ? { ...task, title: editTitle } : task
+        )
       );
-
-      // If the request is successful, update the task in the state
-      setTasks(tasks.map((task) => (task.id === id ? updatedTask.data : task)));
+      setEditingId(null);
+      setEditTitle("");
     } catch (error) {
-      // Handle the error
-      console.error("Error updating task:", error);
+      console.error('Error saving edit:', error);
     }
-
-    setEditingId(null);
-    setEditTitle("");
   };
+
   const calculateRemainingTime = (dueDate) => {
     const now = new Date();
     const due = new Date(dueDate);
@@ -149,19 +169,16 @@ const TaskReminders = () => {
           Add Task
         </button>
       </div>
-      <ul className="space-y-4">
+      <ul>
         {tasks.map((task) => (
           <li
-            key={task.id}
-            className={`bg-white rounded-md overflow-hidden shadow-lg ${
-              task.completed
-                ? "border-green-500 border-2"
-                : "border-gray-200 border-2"
-            }`}
+            key={task.task_id}
+            className={`bg-gray-100 rounded-md overflow-hidden shadow ${task.completed ? "opacity-75" : ""
+              }`}
           >
-            <div className="p-4 flex justify-between items-start">
+            <div className="p-4 flex justify-between items-center">
               <div className="flex-1">
-                {editingId === task.id ? (
+                {editingId === task.task_id ? (
                   <input
                     type="text"
                     value={editTitle}
@@ -169,54 +186,51 @@ const TaskReminders = () => {
                     className="input text-base w-full"
                   />
                 ) : (
-                  <div>
-                    <div className="flex items-center space-x-4">
-                      <input
-                        type="checkbox"
-                        checked={task.completed}
-                        onChange={() => toggleTaskCompletion(task.id)}
-                        className="form-checkbox rounded text-blue-500 h-5 w-5"
-                      />
-                      <span
-                        className={`text-lg ${
-                          task.completed
-                            ? "text-gray-500 line-through"
-                            : "text-gray-800"
+                  <div className="flex items-center space-x-4">
+                    <input
+                      type="checkbox"
+                      checked={task.completed}
+                      onChange={() => toggleTaskCompletion(task.task_id)}
+                      className="form-checkbox rounded text-blue-500 h-5 w-5"
+                    />
+                    <span
+                      className={`text-lg ${task.completed
+                        ? "text-gray-500 line-through"
+                        : "text-gray-800"
                         }`}
-                      >
-                        {task.title}
-                      </span>
-                    </div>
-                    {/* Display task description */}
-                    <p className="text-sm text-gray-600 mt-2">
-                      {task.description}
-                    </p>
+                    >
+                      {task.title}
+                    </span>
                   </div>
                 )}
               </div>
-              <div className="flex flex-col space-y-2 sm:space-y-0 sm:flex-row sm:items-center sm:space-x-2">
-                {editingId === task.id ? (
+              <div className="flex items-center space-x-2">
+                {editingId === task.task_id ? (
                   <button
-                    onClick={() => saveEdit(task.id)}
+                    onClick={() => saveEdit(task.task_id)}
                     className="btn bg-blue-500 hover:bg-blue-700 text-white"
                   >
                     Save
                   </button>
                 ) : (
-                  <div className="flex space-x-2">
+                  <>
                     <button
-                      onClick={() => startEditing(task.id)}
-                      className="btn p-2 rounded-full bg-yellow-500 hover:bg-yellow-700 text-white flex items-center justify-center"
+                      onClick={() => startEditing(task.task_id)}
+                      className="btn p-2 rounded-full bg-yellow-500 hover:bg-yellow-700 text-white flex items-center justify-center text-lg"
                     >
-                      <FaEdit className="h-6 w-6" />
+                      <FaEdit className="h-5 w-5" />{" "}
+                      {/* Adjust size as needed */}
                     </button>
                     <button
-                      onClick={() => removeTask(task.id)}
-                      className="btn p-2 rounded-full bg-red-500 hover:bg-red-700 text-white flex items-center justify-center"
+                      onClick={() => {
+                        console.log("A");
+                        removeTask(task.task_id)}}
+                      className="btn p-2 rounded-full bg-red-500 hover:bg-red-700 text-white flex items-center justify-center text-lg"
                     >
-                      <FaTrashAlt className="h-6 w-6" />
+                      <FaTrashAlt className="h-5 w-5" />{" "}
+                      {/* Adjust size as needed */}
                     </button>
-                  </div>
+                  </>
                 )}
               </div>
             </div>

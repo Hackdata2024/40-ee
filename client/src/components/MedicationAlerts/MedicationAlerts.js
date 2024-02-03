@@ -1,30 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-// Dummy medication data
-let dummyData = [
-  {
-    user_id: "61453c96e21fd8ec8c3b23ba",
-    name: "Medication A",
-    dosage: "10mg",
-    remindersEnabled: true,
-    lastTaken: new Date(),
-    endDate: new Date("2024-02-28"),
-    intakeTimes: ["08:00", "12:00", "18:00"],
-    daysOfWeek: ["Monday", "Wednesday", "Friday"],
-  },
-  {
-    user_id: "61453c96e21fd8ec8c3b23ba",
-    name: "Medication B",
-    dosage: "20mg",
-    remindersEnabled: true,
-    lastTaken: new Date(),
-    endDate: new Date("2024-03-15"),
-    intakeTimes: ["10:00", "16:00", "22:00"],
-    daysOfWeek: ["Tuesday", "Thursday", "Saturday"],
-  },
-  // Add more dummy data as needed
-];
 
 const useMedicationData = () => {
   const [medications, setMedications] = useState([]);
@@ -59,7 +35,7 @@ const MedicationAlert = () => {
   };
 
   const handleAddMedication = () => {
-    dummyData.push({
+    medications.push({
       user_id: "61453c96e21fd8ec8c3b23ba",
       ...newMedication,
       intakeTimes: [...newMedication.intakeTimes, newTime],
