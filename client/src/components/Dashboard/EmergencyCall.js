@@ -18,7 +18,7 @@ const EmergencyCall = () => {
         {emergencyContacts.map((contact, index) => (
           <div key={index} className="flex items-center justify-between mb-2">
             <span>{contact.name}</span>
-            <a href="tel:112" className="bg-red-500 text-white py-1 px-3 rounded hover:bg-red-700 transition-colors text-sm">
+            <a href={`tel:${contact.phone}`} className="bg-red-500 text-white py-1 px-3 rounded hover:bg-red-700 transition-colors text-sm">
               Call {contact.phone}
             </a>
           </div>
