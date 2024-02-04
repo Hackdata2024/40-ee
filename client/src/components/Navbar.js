@@ -24,12 +24,16 @@ const Navbar = () => {
       text: "About",
       icon: <InfoIcon />,
     },
+    {
+      text: "Work",
+    },
   ];
   return (
     <nav>
       <div className="navbar-links-container">
         <a href="#home">Home</a>
         <a href="#about">About</a>
+        <a href="#work">Work</a>
       </div>
       <div className="navbar-menu-container">
         <HiOutlineBars3 onClick={() => setOpenMenu(true)} />
