@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 const EmergencyCall = () => {
   const emergencyContacts = [
     { name: "Ambulance", phone: "112" },
-    { name: "Daughter - Beti", phone: "555-1234" },
-    { name: "Doctor - Dr", phone: "555-9876" },
+    { name: "Daughter", phone: "555-1234" },
+    { name: "Doctor", phone: "555-9876" },
     // Add more contacts here
   ];
 
@@ -18,9 +18,9 @@ const EmergencyCall = () => {
         {emergencyContacts.map((contact, index) => (
           <div key={index} className="flex items-center justify-between mb-2">
             <span>{contact.name}</span>
-            <button className="bg-red-500 text-white py-1 px-3 rounded hover:bg-red-700 transition-colors text-sm">
+            <a href="tel:112" className="bg-red-500 text-white py-1 px-3 rounded hover:bg-red-700 transition-colors text-sm">
               Call {contact.phone}
-            </button>
+            </a>
           </div>
         ))}
       </div>
