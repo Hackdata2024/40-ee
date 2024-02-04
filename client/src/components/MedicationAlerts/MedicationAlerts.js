@@ -35,6 +35,7 @@ const MedicationAlert = () => {
   };
 
   const handleAddMedication = () => {
+    
     medications.push({
       user_id: "61453c96e21fd8ec8c3b23ba",
       ...newMedication,

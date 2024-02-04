@@ -19,7 +19,7 @@ const Dashboard = () => {
         <Header toggleTheme={toggleTheme} /> {/* Set the header */}
       </div>
       <div className="flex flex-wrap md:flex-nowrap gap-4 h-full">
-        <div className="flex flex-col md:w-1/2 space-y-4 ml-8 h-full">
+        <div className="flex flex-col w-full md:w-1/2 space-y-4 ml-8 h-full">
           <div className="bg dark:bg-dark rounded-lg shadow-lg overflow-hidden h-full">
             <TaskReminder />
           </div>
