@@ -11,7 +11,7 @@ const EmergencyCalling = () => {
   const [emergencyContacts, setEmergencyContacts] = useState([]);
 
   const fetchContacts = async () => {
-    const { data } = await axios.get('http://localhost:5000/api/users');
+    const { data } = await axios.get('http://10.6.3.187:5000/api/users');
     console.log(data);
     data.map((user) => {
       console.log(user.emergencyContact);

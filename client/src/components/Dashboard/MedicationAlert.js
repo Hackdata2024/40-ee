@@ -8,7 +8,7 @@ const MedicationAlert = () => {
 
   const fetchMedications = async () => {
     try {
-      const { data } = await axios.get("http://localhost:5000/api/medications");
+      const { data } = await axios.get('http://10.6.3.187:5000/api/medications');
       setMedications(data);
     } catch (error) {
       console.error("Error fetching tasks:", error);
