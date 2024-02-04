@@ -18,6 +18,7 @@ const Header = () => {
 
   const { user } = useUser();
   const { fullName } = user;
+
   const navigate = useNavigate(); // Initialize useNavigate
   const { signOut } = useClerk(); // Initialize useClerk
 

@@ -13,7 +13,7 @@ const Home = () => {
   // Redirect to dashboard if already signed in
   React.useEffect(() => {
     if (isSignedIn) {
-      navigate("/dashboard");
+      navigate("/account");
     }
   }, [isSignedIn, navigate]);
 

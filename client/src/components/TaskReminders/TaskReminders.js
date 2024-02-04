@@ -13,7 +13,7 @@ const TaskReminders = () => {
 
   const fetchTasks = async () => {
     try {
-      const { data } = await axios.get('http://10.6.3.187:5000/api/tasks');
+      const { data } = await axios.get('http://localhost:5000/api/tasks');
       setTasks(data);
     } catch (error) {
       console.error("Error fetching tasks:", error);
@@ -39,7 +39,7 @@ const TaskReminders = () => {
     reminderDate.setHours(hours, minutes);
 
     try {
-      const response = await axios.post('http://10.6.3.187:5000/api/tasks', {
+      const response = await axios.post('http://localhost:5000/api/tasks', {
         user_id: 1,
         task_id: 5,
         title: newTaskTitle, 
@@ -63,7 +63,7 @@ const TaskReminders = () => {
 
   const toggleTaskCompletion = async (id) => {
     try {
-      await axios.patch(`http://10.6.3.187:5000/api/tasks/${id}`, {
+      await axios.patch(`http://localhost:5000/api/tasks/${id}`, {
         completed: !tasks.find((task) => task.task_id === id).completed,
       });
 
@@ -80,7 +80,7 @@ const TaskReminders = () => {
   const removeTask = async (id) => {
     console.log(id);
     try {
-      await axios.delete(`http://10.6.3.187:5000/api/tasks/${id}`);
+      await axios.delete(`http://localhost:5000/api/tasks/${id}`);
       setTasks(tasks.filter((task) => task.task_id !== id));
     } catch (error) {
       console.error("Error removing task:", error);
@@ -99,7 +99,7 @@ const TaskReminders = () => {
 
   const saveEdit = async (id) => {
     try {
-      await axios.patch(`http://10.6.3.187:5000/api/tasks/${id}`, {
+      await axios.patch(`http://localhost:5000/api/tasks/${id}`, {
         title: editTitle,
       });
 

@@ -8,7 +8,7 @@ const NewsComponent = () => {
 
   useEffect(() => {
     const fetchPositiveNews = async () => {
-      const apiUrl = 'http://10.6.3.187:5000/api/positive-news';
+      const apiUrl = 'http://localhost:5000/api/positive-news';
       try {
         const response = await axios.get(apiUrl);
         setNewsData(response.data.slice(0, 10));

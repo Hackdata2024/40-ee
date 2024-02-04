@@ -23,10 +23,31 @@ const getUserById = async (req, res) => {
     }
 };
 
+const createUser = async (req, res) => {
+    const { firstName, lastName, dateOfBirth, email, phoneNumber, emergencyContact, password } = req.body;
+    try {
+        const newUser = new User({
+            firstName,
+            lastName,
+            dateOfBirth,
+            email,
+            phoneNumber,
+            emergencyContact,
+            password,
+        });
+        const savedUser = await newUser.save();
+        res.json(savedUser);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: error.message });
+    }
+};
+
 // Add more user controllers as needed
 
 module.exports = {
     getAllUsers,
     getUserById,
+    createUser,
     // Add more exported functions as needed
 };
