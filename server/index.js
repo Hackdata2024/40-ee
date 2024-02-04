@@ -1,4 +1,5 @@
 // server/index.js
+require('dotenv').config()
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -20,7 +21,7 @@ app.get('/', (req, res) => {
 }
 );
 
-mongoose.connect('mongodb+srv://am398:IamwxhwOL6pVcA3i@cluster0.e8ghf1k.mongodb.net/mydb', {
+mongoose.connect(`mongodb+srv://am398:${process.env.PASSWORD}@cluster0.e8ghf1k.mongodb.net/mydb`, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   // useCreateIndex: true,
