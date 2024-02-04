@@ -25,7 +25,7 @@ const EmergencyCall = () => {
         ))}
       </div>
       <Link to="/emergency-calling">
-        <button className="mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 transition-colors w-full">
+        <button className="mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 transition-colors w-full" style={{ backgroundColor: "#fe9e0d" }}>
           + Add Emergency Contact
         </button>
       </Link>

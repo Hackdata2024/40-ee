@@ -45,7 +45,7 @@ const TaskReminders = () => {
         completed: false,
       });
 
-      const newTask = response.data; // Assuming the server returns the new task directly
+      const newTask = response.data;
       setTasks([...tasks, newTask]);
 
       setNewTaskTitle("");
