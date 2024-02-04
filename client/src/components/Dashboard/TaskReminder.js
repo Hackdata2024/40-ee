@@ -2,6 +2,7 @@
 
 import React from "react";
 import "./styles.css";
+import { Link } from "react-router-dom";
 const TaskReminder = () => {
   // Dummy tasks for layout. Replace with actual tasks.
   const tasks = [
@@ -23,9 +24,11 @@ const TaskReminder = () => {
           </li>
         ))}
       </ul>
-      <button className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-        Add Task
-      </button>
+      <Link to="/task-reminders">
+        <button className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          Manage Tasks
+        </button>
+      </Link>
     </div>
   );
 };
