@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useTheme } from "./ThemeContext"; // Import useTheme hook
 import { FaSun, FaMoon } from "react-icons/fa"; // Import icons
-
+import { useUser } from "@clerk/clerk-react";
 const Header = () => {
   // Create a state for currentTime
   const [currentTime, setCurrentTime] = useState(
@@ -12,6 +12,9 @@ const Header = () => {
       hour12: true, // Use 12-hour format
     })
   );
+
+  const { user } = useUser();
+  const {fullName} = user;
 
   const currentDate = new Date().toLocaleDateString("en-US", {
     weekday: "long", // e.g. Thursday
@@ -25,6 +28,7 @@ const Header = () => {
   const toggleTheme = () => {
     setTheme(theme === "light" ? "dark" : "light"); // Toggle the theme
   };
+  
 
   useEffect(() => {
     // Update the time every second
@@ -50,7 +54,7 @@ const Header = () => {
       }`}
     >
       <div className="flex flex-col items-start">
-        <h1 className="text-2xl font-bold">Hi Mr. John</h1>
+        <h1 className="text-2xl font-bold">Hi {fullName}</h1>
         <h3 className="text-lg">{currentDate}</h3>
       </div>
       <div className="flex flex-col items-end">
