@@ -1,11 +1,8 @@
-// server/routes/positiveNewsRoutes.js
+// positiveNewsRoutes.js
 const express = require('express');
 const router = express.Router();
+const PositiveNewsController = require('../controllers/positiveNewsController');
 
-// const positiveNewsController = require('../controllers/positiveNewsController');
-
-router.get('/', positiveNewsController.getAllPositiveNews);
-router.get('/:newsId', positiveNewsController.getPositiveNewsById);
-// Add more positive news routes as needed
+router.get('/', PositiveNewsController.getPositiveNews);
 
 module.exports = router;
