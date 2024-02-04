@@ -5,7 +5,7 @@ import axios from "axios";
 const useMedicationData = () => {
   const [medications, setMedications] = useState([]);
   const fetchMedication = async () => {
-    const { data } = await axios.get('http://localhost:5000/api/medications');
+    const { data } = await axios.get('http://10.6.3.187:5000/api/medications');
     setMedications(data);
   }
 
