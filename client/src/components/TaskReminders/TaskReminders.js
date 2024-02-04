@@ -39,7 +39,7 @@ const TaskReminders = () => {
     reminderDate.setHours(hours, minutes);
 
     try {
-      const response = await axios.post('http://localhost:5000/api/tasks', {
+      const response = await axios.post('http://10.6.3.187:5000/api/tasks', {
         user_id: 1,
         task_id: 5,
         title: newTaskTitle, 
