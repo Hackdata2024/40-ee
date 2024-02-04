@@ -28,7 +28,7 @@ Sentiment Analysis - Natural Language Processing (NLP) (Python)
 
 ## Our Team
 
-Naman Sharma - Contributed in the making the front end of the website seemless and attractive using ReactJS
+Naman Sharma - Contributed in making the functionalities for the front end of the website seamless and attractive using ReactJS.
 
 Anuj Maurya - Contributed by making the website functional by coding the backend of the website using NodeJS and ExpressJS
 
