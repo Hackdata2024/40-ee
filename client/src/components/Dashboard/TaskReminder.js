@@ -10,7 +10,7 @@ const TaskReminder = () => {
 
   const fetchTasks = async () => {
     try {
-      const { data } = await axios.get('http://localhost:5000/api/tasks');
+      const { data } = await axios.get('http://10.6.3.187:5000/api/tasks');
       setTasks(data);
     } catch (error) {
       console.error('Error fetching tasks:', error);

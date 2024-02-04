@@ -33,6 +33,6 @@ mongoose.connect(`mongodb+srv://am398:${process.env.PASSWORD}@cluster0.e8ghf1k.m
 app.use('/api', routes);
 
 // Start the server
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server is running on port ${PORT}`);
 });
