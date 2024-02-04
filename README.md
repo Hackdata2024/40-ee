@@ -35,3 +35,11 @@ Anuj Maurya - Contributed by making the website functional by coding the backend
 Ishaan Bhartiya - Contributed by managing the database for the website using MongoDB
 
 Vidip Jain - Contributed by performing sentiment analysis to deliver only positive news using NLP
+
+## To run locally
+
+Set up backend: Node
+cd to server directory. npm install. npm start
+
+Set up frontend: React
+cd to client directory. npm install. npm start
