@@ -10,11 +10,11 @@ const EmergencyCall = () => {
   ];
 
   return (
-    <div className="emergency-call">
+    <div className="emergency-call pl-4">
       <div>
-        <h2 className="text-lg font-semibold mb-4">
-          Emergency Call & Contacts
-        </h2>
+        <div className="flex items-center justify-center h-full">
+          <h2 className="text-xl font-bold mb-4">Emergency Call & Contacts</h2>
+        </div>
         {emergencyContacts.map((contact, index) => (
           <div key={index} className="flex items-center justify-between mb-2">
             <span>{contact.name}</span>
@@ -25,7 +25,10 @@ const EmergencyCall = () => {
         ))}
       </div>
       <Link to="/emergency-calling">
-        <button className="mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 transition-colors w-full" style={{ backgroundColor: "#fe9e0d" }}>
+        <button
+          className="mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 transition-colors w-full"
+          style={{ backgroundColor: "#fe9e0d" }}
+        >
           + Add Emergency Contact
         </button>
       </Link>
