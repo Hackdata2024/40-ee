@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useTheme } from "./ThemeContext"; // Import useTheme hook
 import { FaSun, FaMoon } from "react-icons/fa"; // Import icons
 import { useUser } from "@clerk/clerk-react";
+import { useClerk } from "@clerk/clerk-react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
+
 const Header = () => {
   // Create a state for currentTime
   const [currentTime, setCurrentTime] = useState(
@@ -14,7 +17,9 @@ const Header = () => {
   );
 
   const { user } = useUser();
-  const {fullName} = user;
+  const { fullName } = user;
+  const navigate = useNavigate(); // Initialize useNavigate
+  const { signOut } = useClerk(); // Initialize useClerk
 
   const currentDate = new Date().toLocaleDateString("en-US", {
     weekday: "long", // e.g. Thursday
@@ -28,7 +33,11 @@ const Header = () => {
   const toggleTheme = () => {
     setTheme(theme === "light" ? "dark" : "light"); // Toggle the theme
   };
-  
+
+  const handleLogout = async () => {
+    await signOut(); // Sign out the user
+    navigate("/"); // Redirect to the root URL after logout
+  };
 
   useEffect(() => {
     // Update the time every second
@@ -59,9 +68,17 @@ const Header = () => {
       </div>
       <div className="flex flex-col items-end">
         <h2 className="text-xl font-semibold">{currentTime}</h2>
-        <button onClick={toggleTheme} className="focus:outline-none">
-          {theme === "light" ? <FaMoon /> : <FaSun />}
-        </button>
+        <div className="flex items-center gap-2">
+          <button onClick={toggleTheme} className="focus:outline-none">
+            {theme === "light" ? <FaMoon /> : <FaSun />}
+          </button>
+          <button
+            onClick={handleLogout}
+            className="text-white bg-red-500 hover:bg-red-700 py-1 px-2 rounded transition-colors"
+          >
+            Logout
+          </button>
+        </div>
       </div>
     </div>
   );
