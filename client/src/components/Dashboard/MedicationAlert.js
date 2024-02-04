@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const MedicationAlert = () => {
   const medications = ["8:00 AM - Blood Pressure Pill", "1:00 PM - Vitamin D"];
@@ -15,12 +16,15 @@ const MedicationAlert = () => {
           ))}
         </ul>
       </div>
-      <button
-        className="mt-2 w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-green-700 transition-colors"
-        style={{ marginTop: "-40px" }}
-      >
-        + Add Alert
-      </button>
+
+      <Link to="/medication-alerts">
+        <button
+          className="mt-2 w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-green-700 transition-colors"
+          style={{ marginTop: "-40px" }}
+        >
+          + Add Alert
+        </button>
+      </Link>
     </div>
   );
 };
