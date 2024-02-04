@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FaEdit, FaTrashAlt, FaClock } from "react-icons/fa";
-import axios from 'axios';
+import axios from "axios";
 
 const TaskReminders = () => {
   const [tasks, setTasks] = useState([]);
@@ -13,10 +13,10 @@ const TaskReminders = () => {
 
   const fetchTasks = async () => {
     try {
-      const { data } = await axios.get('http://localhost:5000/api/tasks');
+      const { data } = await axios.get("http://localhost:5000/api/tasks");
       setTasks(data);
     } catch (error) {
-      console.error('Error fetching tasks:', error);
+      console.error("Error fetching tasks:", error);
     }
   };
 
@@ -26,19 +26,23 @@ const TaskReminders = () => {
 
   const addTask = async () => {
     console.log("Hello");
-    console.log(newTaskTitle, newTaskDescription, newTaskDueDate, newTaskReminderTime);
+    console.log(
+      newTaskTitle,
+      newTaskDescription,
+      newTaskDueDate,
+      newTaskReminderTime
+    );
     if (!newTaskTitle.trim()) return;
 
     const reminderDate = new Date();
-    const [hours, minutes] = newTaskReminderTime.split(':');
+    const [hours, minutes] = newTaskReminderTime.split(":");
     reminderDate.setHours(hours, minutes);
 
-  
     try {
-      const response = await axios.post('http://localhost:5000/api/tasks', {
+      const response = await axios.post("http://localhost:5000/api/tasks", {
         user_id: 1,
-        task_id: 4,
-        title: newTaskTitle,
+        task_id: 5,
+        title: newTaskTitle, 
         description: newTaskDescription,
         due_date: newTaskDueDate,
         reminder_time: reminderDate,
@@ -53,10 +57,9 @@ const TaskReminders = () => {
       setNewTaskDueDate("");
       setNewTaskReminderTime("");
     } catch (error) {
-      console.error('Error adding task:', error);
+      console.error("Error adding task:", error);
     }
   };
-
 
   const toggleTaskCompletion = async (id) => {
     try {
@@ -70,7 +73,7 @@ const TaskReminders = () => {
         )
       );
     } catch (error) {
-      console.error('Error toggling task completion:', error);
+      console.error("Error toggling task completion:", error);
     }
   };
 
@@ -80,7 +83,7 @@ const TaskReminders = () => {
       await axios.delete(`http://localhost:5000/api/tasks/${id}`);
       setTasks(tasks.filter((task) => task.task_id !== id));
     } catch (error) {
-      console.error('Error removing task:', error);
+      console.error("Error removing task:", error);
     }
   };
 
@@ -108,7 +111,7 @@ const TaskReminders = () => {
       setEditingId(null);
       setEditTitle("");
     } catch (error) {
-      console.error('Error saving edit:', error);
+      console.error("Error saving edit:", error);
     }
   };
 
@@ -173,8 +176,9 @@ const TaskReminders = () => {
         {tasks.map((task) => (
           <li
             key={task.task_id}
-            className={`bg-gray-100 rounded-md overflow-hidden shadow ${task.completed ? "opacity-75" : ""
-              }`}
+            className={`bg-gray-100 rounded-md overflow-hidden shadow ${
+              task.completed ? "opacity-75" : ""
+            }`}
           >
             <div className="p-4 flex justify-between items-center">
               <div className="flex-1">
@@ -194,10 +198,11 @@ const TaskReminders = () => {
                       className="form-checkbox rounded text-blue-500 h-5 w-5"
                     />
                     <span
-                      className={`text-lg ${task.completed
-                        ? "text-gray-500 line-through"
-                        : "text-gray-800"
-                        }`}
+                      className={`text-lg ${
+                        task.completed
+                          ? "text-gray-500 line-through"
+                          : "text-gray-800"
+                      }`}
                     >
                       {task.title}
                     </span>
@@ -224,7 +229,8 @@ const TaskReminders = () => {
                     <button
                       onClick={() => {
                         console.log("A");
-                        removeTask(task.task_id)}}
+                        removeTask(task.task_id);
+                      }}
                       className="btn p-2 rounded-full bg-red-500 hover:bg-red-700 text-white flex items-center justify-center text-lg"
                     >
                       <FaTrashAlt className="h-5 w-5" />{" "}
