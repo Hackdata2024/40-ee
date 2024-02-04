@@ -164,7 +164,7 @@ const TaskReminders = () => {
         </div>
         <button
           onClick={addTask}
-          className="btn bg-blue-500 hover:bg-blue-700 text-white w-full transition duration-200 ease-in-out"
+          className="btn bg-[#fe9e0d] hover:bg-[#d8900f] text-white w-full transition duration-200 ease-in-out"
         >
           Add Task
         </button>
@@ -216,7 +216,7 @@ const TaskReminders = () => {
                   <>
                     <button
                       onClick={() => startEditing(task.task_id)}
-                      className="btn p-2 rounded-full bg-yellow-500 hover:bg-yellow-700 text-white flex items-center justify-center text-lg"
+                      className="btn p-2 rounded-full bg-[#fe9e0d] hover:bg-[#d8900f] text-white flex items-center justify-center"
                     >
                       <FaEdit className="h-5 w-5" />{" "}
                       {/* Adjust size as needed */}
@@ -235,7 +235,7 @@ const TaskReminders = () => {
               </div>
             </div>
             <div className="bg-gray-200 text-sm text-gray-700 p-4 flex items-center">
-              <FaClock className="mr-2" />
+              <FaClock className="mr-2 text-[#fe9e0d]" />
               <span>{calculateRemainingTime(task.due_date)}</span>
             </div>
           </li>
